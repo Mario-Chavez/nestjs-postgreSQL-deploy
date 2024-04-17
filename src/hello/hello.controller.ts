@@ -9,8 +9,10 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags('Hello')
 export class HelloController {
   @Get('/hello')
   indexedDB(@Req() request: Request, @Res() response: Response) {

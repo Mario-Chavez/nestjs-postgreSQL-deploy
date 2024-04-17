@@ -1,18 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/cerate-user.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class UsersService {
-  private users = [];
+  constructor(private prisma: PrismaService) {}
 
   getUsers() {
-    return this.users;
+    return this.prisma.user.findMany(); //utiliza ya las funciones de  prisma y postgress
   }
   createUser(user: CreateUserDto) {
-    this.users.push({
-      ...user,
-      id: this.users.length + 1,
-    });
-    return user;
+    return this.prisma.user.create({ data: user });
   }
 }
